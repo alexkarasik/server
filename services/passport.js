@@ -26,18 +26,15 @@ passport.use(
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
     proxy: true
-<<<<<<< HEAD
   },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id })
         .then((existingUser) => {
           if (existingUser){
-=======
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({googleId: profile.id})
         if (existingUser) {
->>>>>>> stripe
             //we already have a record with the give profileId
             done(null, existingUser);
           }else{
