@@ -19,7 +19,6 @@ passport.deserializeUser((id, done) => {
 //CLIENT SECRET 1A46sPzRyqi52FVreeUJnMXb
 console.log(keys);
 
-
 passport.use(
   new GoogleStrategy(
     {
