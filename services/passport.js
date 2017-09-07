@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
     User.findById(id).then(user => {
         done(null, user);
-    });
+    })
 });
 
 //clientID 650778914974-99h8s6lhbv97u0k2de64m747i61q3gda.apps.googleusercontent.com
@@ -30,11 +30,10 @@ async(accessToken, refreshToken, profile, done) => {
     const existingUser = await User.findOne({googleId: profile.id})
     if (existingUser) {
         //we already have a record with the give profileId
-        return done(null, existingUser);
-    } 
+        done(null, existingUser);
+    } else {
         // we don't have a user record with this ID, make a new record
-        const user = new User({googleId: profile.id}).save();
-        done(null, user));
+        new User({googleId: profile.id}).save().then(user => done(null, user));
     }
 
 }));
